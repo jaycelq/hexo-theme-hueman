@@ -5,6 +5,7 @@
   });
 
   // Share
+  /*
   $('body').on('click', function(){
     $('.article-share-box.on').removeClass('on');
   }).on('click', '.article-share-link', function(e){
@@ -56,6 +57,36 @@
     e.stopPropagation();
 
     window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+  });
+*/
+
+  $(document).ready(function(){ 
+    var $this = $('.article-share-link'),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        title = $this.attr('data-title'),
+        description = $this.attr('description');
+        console.log(encodedUrl);
+        console.log(title);
+    var html = [
+      '<a href="#" class="overlay" id="qrcode"></a>',
+      '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+      '<span title="Share to"></span>',
+      '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ 2635078221 +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+      '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+      '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+      '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+      '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl +'" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+      '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>'
+    ].join('');
+    $this.append(html);
+    $('.article-share-qrcode').click(function(){
+      var imgSrc = $('#qrcode-pic').attr('data-src');
+      $('#qrcode-pic').attr('src', imgSrc);
+      $('#qrcode-pic').load(function(){
+          $('.qrcode strong').text(' ');
+      });
+    });
   });
 
   // Caption
