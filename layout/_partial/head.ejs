@@ -30,7 +30,7 @@
     <link rel="icon" href="<%- theme.favicon %>">
   <% } %>
 
-  <%- css('css/style') %>
+  <%- css((theme.static_url) + '/css/style') %>
   <% if (theme.fancybox){ %>
     <%- css('fancybox/jquery.fancybox') %>
   <% } %>
@@ -69,8 +69,7 @@
     <link href='//fonts.googleapis.com/css?family=Titillium+Web:300,400,600' rel='stylesheet' type='text/css'>
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <% } else { %>
-    <link href='//fonts.lug.ustc.edu.cn/css?family=Titillium+Web:300,400,600' rel='stylesheet' type='text/css'>
-    <link href="//fonts.lug.ustc.edu.cn/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <%- css((theme.static_url)  + '/css/font') %>
   <% } %>
 
 </head>
